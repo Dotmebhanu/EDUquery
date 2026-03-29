@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+python-multipart
+python-dotenv
+langchain
+langchain-community
+langchain-huggingface
+pypdf
+docx2txt
+unstructured
+pinecone-client
+cohere
+groq
+sentence-transformers
+rank-bm25
