@@ -3,7 +3,7 @@ import tempfile
 import os
 from langchain_core.documents import Document
 from langchain_community.document_loaders import Docx2txtLoader
-from langchain_community.document_loaders import UnstructuredPowerPointLoader
+
 
 """
 Main Agenda: loading user uploaded files into LangChain Documents
@@ -57,8 +57,34 @@ def load_document(file_bytes: bytes, filename: str):
         elif suffix == ".docx":
             loader = Docx2txtLoader(temp_path)
 
-        elif suffix in [".ppt", ".pptx"]:
-            loader = UnstructuredPowerPointLoader(temp_path)
+        elif suffix == ".pptx":
+            from pptx import Presentation
+            prs = Presentation(temp_path)
+            documents = []
+
+            for slide_num, slide in enumerate(prs.slides):
+                text = ""
+                for shape in slide.shapes:
+                    if hasattr(shape, "text"):
+                        text += shape.text + "\n"
+                    if shape.has_table:
+                        for row in shape.table.rows:
+                            row_text = " | ".join(
+                                cell.text.strip()
+                                for cell in row.cells
+                            )
+                            text += row_text + "\n"
+
+                if text.strip():  # skip empty slides
+                    documents.append(Document(
+                        page_content=text,
+                        metadata={
+                            "filename": filename,
+                            "slide": slide_num + 1  # use "slide" not "page" for clarity
+                        }
+                    ))
+
+            return documents
 
         else:
             raise ValueError(f"Unsupported file type: {suffix}")

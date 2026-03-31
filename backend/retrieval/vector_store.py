@@ -19,7 +19,7 @@ def store_chunks(chunks):
             "metadata": {
                 "text": chunk.page_content,
                 "filename": chunk.metadata.get("filename", "unknown"),
-                "page": chunk.metadata.get("page", 0),
+                "page": chunk.metadata.get("page", chunk.metadata.get("slide", 0)),
                 "chunk_index": chunk.metadata.get("chunk_index", i)
             }
         })
