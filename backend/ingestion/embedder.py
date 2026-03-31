@@ -1,4 +1,4 @@
-from langchain.embeddings import HuggingFaceEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 embeddings= HuggingFaceEmbeddings(
     model_name="BAAI/bge-base-en",
     model_kwargs={"device": "cpu"},

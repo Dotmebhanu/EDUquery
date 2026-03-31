@@ -8,8 +8,9 @@ langchain-huggingface
 pypdf
 docx2txt
 unstructured
-pinecone-client
+pinecone
 cohere
 groq
 sentence-transformers
 rank-bm25
+python-pptx
