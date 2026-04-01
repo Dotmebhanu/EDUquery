@@ -1,0 +1,7 @@
+RAGAS Evaluation Results
+==================================================
+Faithfulness:      nan
+Answer Relevancy:  0.8129
+Context Precision: 0.9167
+Context Recall:    1.0000
+Total questions:   10

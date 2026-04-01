@@ -15,3 +15,5 @@ sentence-transformers
 rank-bm25
 python-pptx
 pdfplumber
+ragas
+langchain-groq
